@@ -1,0 +1,62 @@
+package MavenSelenium.Selenium12;
+
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class Partners {
+	public static void main(String[] args) {
+		//System Property for chrome Driver   
+		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Selenium\\chromedriver.exe");  
+			
+		// Create a new instance of the Chrome driver 
+        WebDriver driver = new ChromeDriver();
+			
+		//storing the url in string variable 
+		String url = "https://www.freshworks.com/";
+		//navigate to URL
+		driver.get(url);
+		//Maximize window
+	    driver.manage().window().maximize();
+		
+		//implicit wait
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
+		//find Company using Xpath and store in txt variable
+		WebElement txt = driver.findElement(By.xpath("/html/body/header/nav/div/div/ul/li[3]/span"));
+		
+		Actions builder = new Actions(driver);
+		//move to element txt
+		Action seriesOfActions = builder.moveToElement(txt).build();
+		//perform acction
+		seriesOfActions.perform();
+		
+		//Partners
+		driver.findElement(By.xpath("/html/body/header/nav/div/div/ul/li[3]/ul/li[4]")).click();
+		//accepting cookies
+		driver.findElement(By.xpath("//*[@id=\"onetrust-accept-btn-handler\"]")).click();
+		//click on become partners
+		driver.findElement(By.xpath("//*[@id=\"3277902563866\"]/div/div/div/div[1]/div")).click();
+		
+		//Enter inputs
+		driver.findElement(By.name("first-name")).sendKeys("Putta");
+		driver.findElement(By.name("last-name")).sendKeys("s");
+		driver.findElement(By.name("email")).sendKeys("puttas075@gmail.com");
+		driver.findElement(By.name("company")).sendKeys("Software");
+		driver.findElement(By.name("phone")).sendKeys("7788990011");
+		driver.findElement(By.name("website")).sendKeys("software-388543689924217438.myfreshworks.com");
+		driver.findElement(By.name("country-dropdown")).sendKeys("India");
+		driver.findElement(By.name("number-of-employees")).sendKeys("1-10");
+		driver.findElement(By.name("current-partner-type")).sendKeys("other");
+		//click on sign up button
+		driver.findElement(By.xpath("//*[@id=\"prs-main\"]/fieldset[2]/div[3]/label/div")).click();
+		driver.findElement(By.xpath("//*[@id=\"button-submit\"]")).click();	
+	}
+}
